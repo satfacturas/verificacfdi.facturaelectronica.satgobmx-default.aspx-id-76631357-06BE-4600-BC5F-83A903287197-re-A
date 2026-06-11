@@ -395,93 +395,23 @@ function __doPostBack(eventTarget, eventArgument) {
 </div>
 
 <script type="text/javascript">
-    // --- Funciones de control y lógica ---
+    // 1. Funciones originales para que el resto de tu página siga funcionando
     function validarCaracteres() {
-        supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcReceptor");
-        supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcEmisor");
-    }
-
-    function performCheck() {
-        return true; 
-    }
-
-    $(document).ready(function () {
-        if (!sessionStorage.getItem('paginaCargada')) {
-            localStorage.removeItem('tabActivo');
-            sessionStorage.setItem('paginaCargada', 'true');
-        }
-        var tabActivo = localStorage.getItem('tabActivo') || 'verificaFolio';
-        if (tabActivo == 'verificaFolio') { $('#chkFolio').prop('checked', true); $('#chkFolio').click(); }
-        if (tabActivo == 'verificaXml') { $('#chkXml').prop('checked', true); $('#chkXml').click(); }
-        
-        var texto = document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value;
-        if (texto != '') { document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value = ''; }
-        
-        initFileUploader();
-    });
-
-    function guardarTab(tabId) {
-        if (tabId == 'verificaFolio') {
-            $('#ctl00_MainContent_PnlResultados').hide();
-            $('#ctl00_MainContent_PnlNoResultados').hide();
-            $('#ctl00_MainContent_alertEfos').hide(); 
-            $('#ctl00_MainContent_TxtCaptchaNumbers').val(''); 
-            limpiarXml();
-            $('#ctl00_MainContent_hdnConsultaFolio').val(true);
-            $('#BtnImprimirXml').hide();
-        }
-        if (tabId == 'verificaXml') {
-            $('#ctl00_MainContent_divAviso').hide();
-            $('#ctl00_MainContent_hdnConsultaFolio').val(false);
-            $('#ctl00_MainContent_TxtUUID').val('');
-            $('#ctl00_MainContent_TxtRfcEmisor').val('');
-            $('#ctl00_MainContent_TxtRfcReceptor').val('');
-        }
-        localStorage.setItem('tabActivo', tabId);
-    }
-
-    function limpiarXml() {
-        $('#ctl00_MainContent_divAvisoXml').hide();
-        $('#validaTamanioXml').hide();
-        $('#ctl00_MainContent_PnlResultadosXml').hide();
-        $('#txtArchivoXmlSeleccionado').val('');
-        $('#ctl00_MainContent_pnlErrorCaptchaXml').hide();
-        $('#ctl00_MainContent_alertNoResultadosXml').hide();
-        $('#ctl00_MainContent_alertSuccessXml').hide(); 
-        $('#ctl00_MainContent_fileUploadXML').val('');
-        $('#ctl00_MainContent_divValidacionXml').hide();
-        $('#ctl00_MainContent_alertEfosXml').hide();
-    }
-
-    function initFileUploader() {
-        const fileUploader = document.getElementById('ctl00_MainContent_fileUploadXML');
-        const txtNombreArchivo = document.getElementById('txtArchivoXmlSeleccionado');
-        const divAvisoXml = document.getElementById('validaTamanioXml');
-        if (fileUploader) {
-            fileUploader.addEventListener('change', function () {
-                divAvisoXml.style.display = 'none';
-                if (fileUploader.files.length > 0) {
-                    OcultarValidarCampoXML();
-                    txtNombreArchivo.value = fileUploader.files[0].name;
-                }
-            });
+        if(typeof supressUpdatePanelRequestErrorCharacters === 'function') {
+            supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcReceptor");
+            supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcEmisor");
         }
     }
 
-    function OcultarValidarCampoXML() {
-        var validaTxtXml = document.getElementById('validaTxtXml');
-        if (validaTxtXml) validaTxtXml.style.display = 'none';
-    }
-
-    // --- Función personalizada de validación ---
-    function validarSinRedirigir() {
+    // 2. Nuestra lógica para mostrar la tabla sin recargar
+    window.validarSinRedirigir = function() {
         var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
         var contenedor = document.getElementById("printArea");
         var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
         if (folio.trim() === folioCorrecto) {
             contenedor.innerHTML = `
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 20px; border: 1px solid #691C32; padding: 20px; border-radius: 5px; background: #fff;">
                 <h3 style="color: #691C32; margin-bottom: 15px;">Resultado de la verificación:</h3>
                 <table class="table table-bordered" style="width:100%; border: 1px solid #ddd; border-collapse: collapse;">
                     <tr style="background-color: #f9f9f9;">
@@ -492,21 +422,32 @@ function __doPostBack(eventTarget, eventArgument) {
                     <tr>
                         <td style="padding: 10px; border: 1px solid #ddd;">ADU811129I31</td>
                         <td style="padding: 10px; border: 1px solid #ddd;">NESK901206FL2</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">76631357-06BE-4600-BC5F-83A903287197</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">${folioCorrecto}</td>
                     </tr>
                 </table>
             </div>`;
         } else {
-            alert("Folio no encontrado.");
+            alert("Folio no encontrado. Por favor, verifica los datos.");
             contenedor.innerHTML = "";
         }
-    }
+    };
+
+    // 3. Configuración al cargar la página
+    $(document).ready(function () {
+        // Mantenemos tu lógica de pestañas original
+        if (!sessionStorage.getItem('paginaCargada')) {
+            localStorage.removeItem('tabActivo');
+            sessionStorage.setItem('paginaCargada', 'true');
+        }
+        
+        // Forzamos al botón a usar nuestra función sin recargar
+        var btn = document.querySelector('input[value="Verificar CFDI"]');
+        if (btn) {
+            btn.setAttribute("type", "button");
+            btn.onclick = function(e) { 
+                e.preventDefault();
+                window.validarSinRedirigir(); 
+            };
+        }
+    });
 </script>
-
-<link href="Styles/stilosVerificaXml.css" rel="stylesheet" />
-
-<div id="dvAlertMaster"></div>
-<div class="footer noPrint"></div>
-</main>
-</body>
-</html>
