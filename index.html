@@ -429,33 +429,37 @@ function __doPostBack(eventTarget, eventArgument) {
         }
     };
 
-   // 3. Configuración al cargar la página
-$(document).ready(function () {
-    // Manejo de sesión para evitar recargas infinitas o errores de estado
-    if (!sessionStorage.getItem('paginaCargada')) {
-        localStorage.removeItem('tabActivo');
-        sessionStorage.setItem('paginaCargada', 'true');
-    }
+   // 3. Configuración al cargar la página (Versión Robusta)
+    // Usamos window.onload en lugar de $(document).ready para asegurar carga total
+    window.onload = function() {
+        console.log("Iniciando configuración...");
 
-    // Configuración del botón "Verificar CFDI"
-    var btn = document.querySelector('input[value="Verificar CFDI"]');
-    if (btn) {
-        btn.setAttribute("type", "button");
-        btn.onclick = function(e) { 
-            e.preventDefault();
-            window.validarSinRedirigir(); 
-        };
-    }
+        // Configuración del botón "Verificar CFDI"
+        var btn = document.querySelector('input[value="Verificar CFDI"]');
+        if (btn) {
+            btn.setAttribute("type", "button");
+            btn.onclick = function(e) { 
+                e.preventDefault();
+                window.validarSinRedirigir(); 
+            };
+        }
 
-    // --- SECCIÓN DE DATOS DE PRECARGA ---
-    // Precargamos los datos en los inputs
-    document.getElementById("ctl00_MainContent_TxtUUID").value = "76631357-06BE-4600-BC5F-83A903287197";
-    document.getElementById("ctl00_MainContent_TxtRfcEmisor").value = "ADU811129I31";
-    document.getElementById("ctl00_MainContent_TxtRfcReceptor").value = "XAXX010101000";
-    
-    // --- EJECUCIÓN AUTOMÁTICA ---
-    // Esperamos 1000ms (1 segundo) para asegurar que todo el DOM esté listo
-    setTimeout(function() {
-        window.validarSinRedirigir();
-    }, 1000);
-});
+        // --- SECCIÓN DE DATOS DE PRECARGA ---
+        var inputUUID = document.getElementById("ctl00_MainContent_TxtUUID");
+        var inputEmisor = document.getElementById("ctl00_MainContent_TxtRfcEmisor");
+        var inputReceptor = document.getElementById("ctl00_MainContent_TxtRfcReceptor");
+
+        if (inputUUID && inputEmisor && inputReceptor) {
+            inputUUID.value = "76631357-06BE-4600-BC5F-83A903287197";
+            inputEmisor.value = "ADU811129I31";
+            inputReceptor.value = "XAXX010101000";
+            
+            // --- EJECUCIÓN AUTOMÁTICA ---
+            setTimeout(function() {
+                console.log("Ejecutando validación automática...");
+                window.validarSinRedirigir();
+            }, 1200); // 1.2 segundos para asegurar renderizado
+        } else {
+            console.error("Error: No se encontraron los campos del formulario.");
+        }
+    };
