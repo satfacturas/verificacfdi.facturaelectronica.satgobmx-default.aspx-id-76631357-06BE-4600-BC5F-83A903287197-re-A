@@ -6,18 +6,47 @@
     <link href="https://cfdigraficos.z21.web.core.windows.net/main_funcional.css" rel="stylesheet" />
     <style>
         body { padding: 50px; text-align: center; }
-        .mensaje { font-size: 24px; color: green; font-weight: bold; margin-top: 50px; }
+        .resultado-box { margin-top: 30px; border: 1px solid #ccc; padding: 20px; display: inline-block; text-align: left; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Resultado de la consulta</h1>
-        <hr>
-        <div class="mensaje">
-            ¡El comprobante es VÁLIDO!
+        <h1>Verificador de CFDI</h1>
+        
+        <div>
+            <input type="text" id="folioInput" placeholder="Ingresa el Folio Fiscal">
+            <button onclick="buscarFactura()" class="btn btn-primary">Verificar</button>
         </div>
-        <br><br>
-        <a href="sat.html" class="btn btn-primary">Volver a consultar</a>
+
+        <div id="resultado" class="resultado-box" style="display:none;">
+            <div class="mensaje" style="color: green; font-weight: bold;">¡El comprobante es VÁLIDO!</div>
+            <p><strong>RFC Emisor:</strong> <span id="res-rfc-emisor"></span></p>
+            <p><strong>Nombre Emisor:</strong> <span id="res-nombre-emisor"></span></p>
+            <p><strong>Total:</strong> $<span id="res-total"></span></p>
+        </div>
     </div>
+
+    <script>
+        // Esta es tu "base de datos"
+        const baseDeDatos = [
+            { folio: "7663", rfc: "ADU811129I31", nombre: "AUTOMOTRIZ DE DURANGO", total: "256,900.00" },
+            { folio: "1234", rfc: "ABC999999XXX", nombre: "EMPRESA DE PRUEBA", total: "1,500.00" }
+        ];
+
+        function buscarFactura() {
+            const input = document.getElementById("folioInput").value;
+            const encontrado = baseDeDatos.find(item => item.folio === input);
+
+            if (encontrado) {
+                document.getElementById("res-rfc-emisor").innerText = encontrado.rfc;
+                document.getElementById("res-nombre-emisor").innerText = encontrado.nombre;
+                document.getElementById("res-total").innerText = encontrado.total;
+                document.getElementById("resultado").style.display = "block";
+            } else {
+                alert("Folio no encontrado o inválido.");
+                document.getElementById("resultado").style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
