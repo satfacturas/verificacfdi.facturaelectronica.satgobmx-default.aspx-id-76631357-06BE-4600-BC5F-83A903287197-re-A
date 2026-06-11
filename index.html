@@ -410,42 +410,45 @@ function __doPostBack(eventTarget, eventArgument) {
         var folio = document.getElementById("ctl00_MainContent_TxtUUID").value; 
         var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
-       if (folio.trim() === folioCorrecto) {
-          if (folio.trim() === folioCorrecto) {
-            contenedor.innerHTML = `
-            <div style="margin-top: 20px; border: 1px solid #691C32; padding: 20px; border-radius: 5px; background: #fff; font-family: Arial, sans-serif;">
-                <h3 style="color: #691C32; margin-bottom: 15px; border-bottom: 2px solid #691C32; padding-bottom: 10px;">Resultado de la verificación:</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #dee2e6;">
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del emisor</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del emisor</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del receptor</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del receptor</div>
-                    
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">ADU811129I31</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">AUTOMOTRIZ DE DURANGO</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">NESK901206FL2</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</div>
+      if (folio.trim() === folioCorrecto) {
+    contenedor.innerHTML = `
+    <div style="margin-top: 20px; border: 1px solid #691C32; padding: 20px; border-radius: 5px; background: #fff; font-family: Arial, sans-serif;">
+        <h3 style="color: #691C32; margin-bottom: 15px; border-bottom: 2px solid #691C32; padding-bottom: 10px;">Resultado de la verificación:</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #dee2e6;">
+            
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del emisor</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del emisor</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del receptor</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del receptor</div>
+            
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">ADU811129I31</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">AUTOMOTRIZ DE DURANGO</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">NESK901206FL2</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</div>
 
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Folio fiscal</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha de expedición</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha certificación</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">PAC que certificó</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Folio fiscal</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha de expedición</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha certificación</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">PAC que certificó</div>
 
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">${folioCorrecto}</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:11:26</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:18:04</div>
-                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">SFE0807172W8</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6; word-break: break-all;">${folioCorrecto}</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:11:26</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:18:04</div>
+            <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">SFE0807172W8</div>
 
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Total del CFDI</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Efecto del comprobante</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estado CFDI</div>
-                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estatus de cancelación</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Total del CFDI</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Efecto del comprobante</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estado CFDI</div>
+            <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estatus de cancelación</div>
 
-                    <div style="padding: 10px;">$256,900.00</div>
-                    <div style="padding: 10px;">Ingreso</div>
-                    <div style="padding: 10px; font-weight: bold; color: green;">Vigente</div>
-                    <div style="padding: 10px;">No cancelable</div>
-                </div>
-            </div>`;
-        }
+            <div style="padding: 10px;">$256,900.00</div>
+            <div style="padding: 10px;">Ingreso</div>
+            <div style="padding: 10px; font-weight: bold; color: green;">Vigente</div>
+            <div style="padding: 10px;">No cancelable</div>
+        </div>
+    </div>`;
+} else {
+    alert("Folio no encontrado. Por favor, verifica los datos.");
+    contenedor.innerHTML = "";
+}
