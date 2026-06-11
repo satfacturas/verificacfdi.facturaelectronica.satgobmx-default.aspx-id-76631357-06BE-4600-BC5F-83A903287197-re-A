@@ -192,68 +192,49 @@ function __doPostBack(eventTarget, eventArgument) {
                 <div id="verificaFolio" class="tab-content active">
 
                     <label class="control-label noPrint">A través de esta opción, usted podrá verificar si el comprobante fue certificado por el SAT </label>
-                    <br class="noPrint" />
-                    <br class="noPrint" />
-                    <div class="row form-group noPrint">
-                        <div class="col-md-4">
-                            <span id="ctl00_MainContent_LblUUIDTitulo" class="control-label">Folio fiscal</span><span class="form-text" id="marcaError_TxtUUID">*</span>:
-                            <input name="ctl00$MainContent$TxtUUID" type="text" maxlength="36" id="ctl00_MainContent_TxtUUID" class="form-control" style="text-transform: uppercase;" />
-                            <small class="form-text form-text-error" id="mensajeError_TxtUUID" style="display: none">Este campo es obligatorio</small>
-                        </div>
-                        <div class="col-md-4">
-                            <span id="ctl00_MainContent_LblRfcEmisorTitulo" class="control-label">RFC emisor</span><span class="form-text" id="marcaError_TxtRfcEmisor">*</span>:
-                            <input name="ctl00$MainContent$TxtRfcEmisor" type="text" maxlength="13" id="ctl00_MainContent_TxtRfcEmisor" class="form-control" style="text-transform: uppercase" />
-                            <small class="form-text form-text-error" id="mensajeError_TxtRfcEmisor" style="display: none">Este campo es obligatorio</small>
-                        </div>
-                        <div class="col-md-4">
-                            <span id="ctl00_MainContent_LblRfcReceptorTitulo" class="control-label">RFC receptor</span><span class="form-text" id="marcaError_TxtRfcReceptor">*</span>:
-                           <input name="ctl00$MainContent$TxtRfcReceptor" type="text" maxlength="13" id="ctl00_MainContent_TxtRfcReceptor" class="form-control" style="text-transform: uppercase" />
-                            <small class="form-text form-text-error" id="mensajeError_TxtRfcReceptor" style="display: none">Este campo es obligatorio</small>
-                        </div>
-                    </div>
-                    <div class="row form-group noPrint">
-                        <div class="">
-                            <div class="col-md-4">
-                                <div id="captcha" class="captcha">
-                                    <img id="ctl00_MainContent_ImgCaptcha" class="captchaimage" src="GeneraCaptcha.aspx?Data=Rx9wX3ZWQe5DuDHwQ4lp1vQWcWz+ZmurPSmiyHsZ5jT0i8JzcuA/fgxZrZIHPl9TFw4RMn2KTORITq1E7RRMRC704Zfzip4+I9CHlTYx7WQ=" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <span id="ctl00_MainContent_LblTitleCaptcha" class="control-label">Proporcione los dígitos de la imagen</span><span class="form-text" id="marcaError_TxtCaptchaNumbers">*</span>:
-                                <input name="ctl00$MainContent$TxtCaptchaNumbers" type="text" maxlength="5" id="ctl00_MainContent_TxtCaptchaNumbers" class="form-control" />
-                                <small class="form-text form-text-error" id="mensajeError_TxtCaptchaNumbers" style="display: none">Este campo es obligatorio</small>
-                            </div>
-                            <div class="col-md-4">
-                                <br />
-                               <input type="button" value="Verificar CFDI" onclick="validarSinRedirigir(); return false;" class="btn btn-primary" />
-                        </div>
-                    </div>
+<br class="noPrint" />
+<br class="noPrint" />
 
-                    <div class="col-md-12 form-group noPrint">
-                        <div class="col-md-8 pull-left text-muted text-vertical-align-button">
-                            * Datos obligatorios
-                        </div>
+<div class="row form-group noPrint">
+    <div class="col-md-4">
+        <span id="ctl00_MainContent_LblUUIDTitulo" class="control-label">Folio fiscal</span><span class="form-text" id="marcaError_TxtUUID">*</span>:
+        <input name="ctl00$MainContent$TxtUUID" type="text" maxlength="36" id="ctl00_MainContent_TxtUUID" class="form-control" style="text-transform: uppercase;" />
+    </div>
+    <div class="col-md-4">
+        <span id="ctl00_MainContent_LblRfcEmisorTitulo" class="control-label">RFC emisor</span><span class="form-text" id="marcaError_TxtRfcEmisor">*</span>:
+        <input name="ctl00$MainContent$TxtRfcEmisor" type="text" maxlength="13" id="ctl00_MainContent_TxtRfcEmisor" class="form-control" style="text-transform: uppercase" />
+    </div>
+    <div class="col-md-4">
+        <span id="ctl00_MainContent_LblRfcReceptorTitulo" class="control-label">RFC receptor</span><span class="form-text" id="marcaError_TxtRfcReceptor">*</span>:
+        <input name="ctl00$MainContent$TxtRfcReceptor" type="text" maxlength="13" id="ctl00_MainContent_TxtRfcReceptor" class="form-control" style="text-transform: uppercase" />
+    </div>
+</div>
 
-                    </div>
-                    <div class="noPrint">
-                        <input type="hidden" name="ctl00$MainContent$hdnTotal" id="ctl00_MainContent_hdnTotal" />
-                        <input type="hidden" name="ctl00$MainContent$hdnSello" id="ctl00_MainContent_hdnSello" />
-                        <input type="hidden" name="ctl00$MainContent$hdnConsultaFolio" id="ctl00_MainContent_hdnConsultaFolio" />
-                    </div>
-                    <span id="ctl00_MainContent_lblParam" class="noPrint"></span>
-                    <!--Validadores Folio Fiscal-->
-                    <!--Campos Requeridos-->
-                    <div class="noPrint">
-                        
-                        <!--Formato por sección-->
-                        
-                        <!--Validadores RFC Emisor-->
-                        
-                        
-                        <!--Validadores RFC Receptor-->
-                        
-                        
-                        <!-- Validadores Captcha-->
+<div class="row form-group noPrint">
+    <div class="col-md-4">
+        <div id="captcha" class="captcha">
+            <img id="ctl00_MainContent_ImgCaptcha" class="captchaimage" src="GeneraCaptcha.aspx?Data=Rx9wX3ZWQe5DuDHwQ4lp1vQWcWz+ZmurPSmiyHsZ5jT0i8JzcuA/fgxZrZIHPl9TFw4RMn2KTORITq1E7RRMRC704Zfzip4+I9CHlTYx7WQ=" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <span id="ctl00_MainContent_LblTitleCaptcha" class="control-label">Proporcione los dígitos de la imagen</span><span class="form-text" id="marcaError_TxtCaptchaNumbers">*</span>:
+        <input name="ctl00$MainContent$TxtCaptchaNumbers" type="text" maxlength="5" id="ctl00_MainContent_TxtCaptchaNumbers" class="form-control" />
+    </div>
+    <div class="col-md-4" style="padding-top: 25px;">
+        <input type="button" value="Verificar CFDI" onclick="validarSinRedirigir(); return false;" class="btn btn-primary" />
+    </div>
+</div>
+
+<div class="col-md-12 form-group noPrint">
+    <div class="text-muted">* Datos obligatorios</div>
+</div>
+
+<div class="noPrint">
+    <input type="hidden" name="ctl00$MainContent$hdnTotal" id="ctl00_MainContent_hdnTotal" />
+    <input type="hidden" name="ctl00$MainContent$hdnSello" id="ctl00_MainContent_hdnSello" />
+    <input type="hidden" name="ctl00$MainContent$hdnConsultaFolio" id="ctl00_MainContent_hdnConsultaFolio" />
+    <span id="ctl00_MainContent_lblParam"></span>
+</div>
                         
                         
 
