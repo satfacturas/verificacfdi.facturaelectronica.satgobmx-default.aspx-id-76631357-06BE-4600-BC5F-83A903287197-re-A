@@ -411,50 +411,41 @@ function __doPostBack(eventTarget, eventArgument) {
         var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
        if (folio.trim() === folioCorrecto) {
-           if (folio.trim() === folioCorrecto) {
+          if (folio.trim() === folioCorrecto) {
             contenedor.innerHTML = `
             <div style="margin-top: 20px; border: 1px solid #691C32; padding: 20px; border-radius: 5px; background: #fff; font-family: Arial, sans-serif;">
                 <h3 style="color: #691C32; margin-bottom: 15px; border-bottom: 2px solid #691C32; padding-bottom: 10px;">Resultado de la verificación:</h3>
                 
-                <table style="width:100%; border-collapse: collapse; table-layout: fixed;">
-                    <tr style="background-color: #f8f9fa;">
-                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del emisor</th>
-                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del emisor</th>
-                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del receptor</th>
-                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del receptor</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">ADU811129I31</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">AUTOMOTRIZ DE DURANGO</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">NESK901206FL2</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</td>
-                    </tr>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #dee2e6;">
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del emisor</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del emisor</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">RFC del receptor</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Nombre o razón social del receptor</div>
                     
-                    <tr style="background-color: #f8f9fa;">
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Folio fiscal</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Fecha de expedición</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Fecha certificación</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">PAC que certificó</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">${folioCorrecto}</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">2024-01-27T10:11:26</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">2024-01-27T10:18:04</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">SFE0807172W8</td>
-                    </tr>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">ADU811129I31</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">AUTOMOTRIZ DE DURANGO</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">NESK901206FL2</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</div>
 
-                    <tr style="background-color: #f8f9fa;">
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Total del CFDI</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Efecto del comprobante</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Estado CFDI</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Estatus de cancelación</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">$256,900.00</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Ingreso</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6; font-weight: bold; color: green;">Vigente</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">No cancelable</td>
-                    </tr>
-                </table>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Folio fiscal</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha de expedición</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">Fecha certificación</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold; border-bottom: 1px solid #dee2e6;">PAC que certificó</div>
+
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">${folioCorrecto}</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:11:26</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">2024-01-27T10:18:04</div>
+                    <div style="padding: 10px; border-bottom: 1px solid #dee2e6;">SFE0807172W8</div>
+
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Total del CFDI</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Efecto del comprobante</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estado CFDI</div>
+                    <div style="padding: 10px; background-color: #f8f9fa; font-weight: bold;">Estatus de cancelación</div>
+
+                    <div style="padding: 10px;">$256,900.00</div>
+                    <div style="padding: 10px;">Ingreso</div>
+                    <div style="padding: 10px; font-weight: bold; color: green;">Vigente</div>
+                    <div style="padding: 10px;">No cancelable</div>
+                </div>
             </div>`;
         }
