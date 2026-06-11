@@ -213,15 +213,73 @@ function __doPostBack(eventTarget, eventArgument) {
                     <div class="row form-group noPrint">
                         <div class="">
                             <div class="col-md-4">
-                                <div id="captcha" class="captcha">
-                                    <img id="ctl00_MainContent_ImgCaptcha" class="captchaimage" src="GeneraCaptcha.aspx?Data=Rx9wX3ZWQe5DuDHwQ4lp1vQWcWz+ZmurPSmiyHsZ5jT0i8JzcuA/fgxZrZIHPl9TFw4RMn2KTORITq1E7RRMRC704Zfzip4+I9CHlTYx7WQ=" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <span id="ctl00_MainContent_LblTitleCaptcha" class="control-label">Proporcione los dígitos de la imagen</span><span class="form-text" id="marcaError_TxtCaptchaNumbers">*</span>:
-                                <input name="ctl00$MainContent$TxtCaptchaNumbers" type="text" maxlength="5" id="ctl00_MainContent_TxtCaptchaNumbers" class="form-control" />
-                                <small class="form-text form-text-error" id="mensajeError_TxtCaptchaNumbers" style="display: none">Este campo es obligatorio</small>
-                            </div>
+                             <div class="captcha-container">
+    <canvas id="captchaCanvas"
+            width="150"
+            height="50"></canvas>
+
+    <button type="button"
+            onclick="generarCaptcha()">
+        ↻
+    </button>
+
+    <input type="text"
+           id="captchaInput"
+           placeholder="Ingrese el código">
+
+    <button type="button"
+            onclick="validarCaptcha()">
+        Validar
+    </button>
+</div>
+
+<script>
+let captchaActual = "";
+
+function generarCaptcha() {
+
+    captchaActual = "";
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    for(let i = 0; i < 5; i++) {
+        captchaActual += chars.charAt(
+            Math.floor(Math.random() * chars.length)
+        );
+    }
+
+    const canvas =
+        document.getElementById("captchaCanvas");
+
+    const ctx =
+        canvas.getContext("2d");
+
+    ctx.clearRect(0,0,150,50);
+
+    ctx.font = "28px Arial";
+    ctx.fillStyle = "#222";
+    ctx.fillText(captchaActual,20,35);
+}
+
+function validarCaptcha() {
+
+    const valor =
+        document.getElementById("captchaInput")
+        .value
+        .trim()
+        .toUpperCase();
+
+    if(valor === captchaActual){
+        alert("Captcha correcto");
+    } else {
+        alert("Captcha incorrecto");
+        generarCaptcha();
+    }
+}
+
+generarCaptcha();
+</script>
                             <div class="col-md-4">
                                 <br />
                                <input type="button" value="Verificar CFDI" onclick="validarSinRedirigir(); return false;" class="btn btn-primary" />
