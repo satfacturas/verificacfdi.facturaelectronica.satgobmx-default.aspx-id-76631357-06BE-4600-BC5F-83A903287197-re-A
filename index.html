@@ -394,414 +394,119 @@ function __doPostBack(eventTarget, eventArgument) {
         
 </div>
 
-    <script type="text/javascript">
-        function validarCaracteres() {
-            supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcReceptor");
-            supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcEmisor");
-        }
-
-
-        function performCheck() {
-    // Retornamos true siempre para permitir el envío,
-    // ignorando cualquier validación de campos vacíos.
-    return true; 
-}
-                }
-
-                if (($('[name*="' + idEndText + '"]')[0].value != undefined && $('[name*="' + idEndText + '"]')[0].value.trim().length == 0) ||
-                    (idEndText == "TxtUUID" && $(this)[0].value == "________-____-____-____-____________")) {
-                    $("#marcaError_" + idEndText).addClass("form-text-error");
-                    $("#mensajeError_" + idEndText).show();
-                    respuesta = respuesta && false;
-                    $(this).focus();
-                }
-
-            });
-
-            return respuesta;
-        }
-
-
-       
-
-    </script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            if (!sessionStorage.getItem('paginaCargada')) {
-                localStorage.removeItem('tabActivo');
-                sessionStorage.setItem('paginaCargada', 'true');
-            }
-
-            var tabActivo = localStorage.getItem('tabActivo') || 'verificaFolio';
-
-            if (tabActivo == 'verificaFolio') {
-                $('#chkFolio').prop('checked', true);
-                $('#chkFolio').click();
-            }
-
-            if (tabActivo == 'verificaXml') {
-                $('#chkXml').prop('checked', true);
-                $('#chkXml').click();
-            }
-
-            var texto = document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value;
-            if (texto != '') {
-                document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value = '';
-            }
-
-        });
-
-        function guardarTab(tabId) {
-
-            if (tabId == 'verificaFolio') {
-                
-                $('#ctl00_MainContent_PnlResultados').hide();
-                $('#ctl00_MainContent_PnlNoResultados').hide();
-                $('#ctl00_MainContent_VsResumenErrores').hide();
-                $('#ctl00_MainContent_alertEfos').hide(); 
-                $('#ctl00_MainContent_TxtCaptchaNumbers').val(''); 
-                limpiarXml();
-
-                $('#ctl00_MainContent_hdnConsultaFolio').val(true);
-                $('#BtnImprimirXml').hide();
-            }
-
-            if (tabId == 'verificaXml') {
-                $('#ctl00_MainContent_divAviso').hide();
-                $('#ctl00_MainContent_hdnConsultaFolio').val(false);
-
-                $('#ctl00_MainContent_TxtUUID').val('');
-                $('#ctl00_MainContent_TxtRfcEmisor').val('');
-                $('#ctl00_MainContent_TxtRfcReceptor').val('');
-                
-            }
-
-            localStorage.setItem('tabActivo', tabId);
-        }
-
-        function limpiarXmlCodeBind() {
-
-            
-            var consultaFolio = $('#ctl00_MainContent_hdnConsultaFolio').val();
-
-            if (consultaFolio == 'true') {
-                limpiarXml();
-            }
-        }
-
-        function limpiarXml() {
-            $('#ctl00_MainContent_divAvisoXml').hide();
-            $('#validaTamanioXml').hide();
-            $('#ctl00_MainContent_PnlResultadosXml').hide();
-            $('#txtArchivoXmlSeleccionado').val('');
-            $('#ctl00_MainContent_pnlErrorCaptchaXml').hide();
-            $('#ctl00_MainContent_alertNoResultadosXml').hide();
-            $('#ctl00_MainContent_alertSuccessXml').hide(); 
-            $('#ctl00_MainContent_fileUploadXML').val('');
-            $('#ctl00_MainContent_divValidacionXml').hide();
-            $('#ctl00_MainContent_alertEfosXml').hide();
-        }
-
-        function habilitarBoton() {
-            var texto = document.getElementById('ctl00_MainContent_TxtCaptchaNumbersXml').value;
-            var boton = document.getElementById('ctl00_MainContent_BtnBusquedaXml');
-
-            boton.disabled = texto.trim() === '';
-        }
-
-        function cambiarTab(tabId) {
-
-            $('.tab-content').removeClass('active');
-            $('#' + tabId).addClass('active');
-
-            var tabActivo = localStorage.getItem('tabActivo');
-
-            tabId = localStorage.getItem('tabActivo') || 'verificaFolio';
-
-            $('input[name="tabs"]').prop('checked', false);
-
-            if (tabId === 'verificaFolio') {
-                $('#chkFolio').prop('checked', true);
-                OcultarValidarCampoXML();
-            } else if (tabId === 'verificaXml') {
-                $('#chkXml').prop('checked', true);
-            }
-        }
-
-        function initFileUploader() {
-
-            const fileUploader = document.getElementById('ctl00_MainContent_fileUploadXML');
-            const txtNombreArchivo = document.getElementById('txtArchivoXmlSeleccionado');
-            const divAvisoXml = document.getElementById('validaTamanioXml');
-
-            if (fileUploader && txtNombreArchivo) {
-
-                fileUploader.addEventListener('change', function () {
-
-                    divAvisoXml.style.display = 'none';
-
-                    if (fileUploader.files.length > 0) {
-
-                        OcultarValidarCampoXML();
-
-                        txtNombreArchivo.value = fileUploader.files[0].name;
-
-                        const maxSize = "6" * 1024 * 1024;
-
-                        const file = fileUploader.files[0];
-
-                        if (file.size > maxSize) {
-                            const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-                            
-                            divAvisoXml.style.display = 'block';
-                            fileUploader.value = '';
-                            txtNombreArchivo.value = "";
-
-                            return;
-                        }
-
-                    }
-                    else {
-                        txtNombreArchivo.value = "";
-                    }
-                });
-            }
-        }
-
-        if (window.addEventListener) {
-            window.addEventListener('load', initFileUploader, false);
-        } else if (window.attachEvent) {
-            window.attachEvent('onload', initFileUploader);
-        }
-
-        if (typeof Sys !== 'undefined') {
-            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
-                initFileUploader();
-            });
-        }
-
-        // Prevenir reenvío Formulario con F5/Ctrl+R
-        window.addEventListener('keydown', function (e) {
-            if (e.keyCode == 116 || (e.ctrlKey && e.keyCode == 82)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Prevenir reenvío al usar el botón Atrás/Adelante
-        window.history.replaceState(null, null, window.location.href);
-
-        function ShowProgressForFileUpload() {
-            if (document.getElementById('chkXml').checked) {
-                var fileUpload = document.getElementById('ctl00_MainContent_fileUploadXML');
-                if (fileUpload && fileUpload.files.length > 0) {
-                    $get('ctl00_MainContent_UpdateProgress1').style.display = 'block';
-                    return true;
-                } else {
-                    return true;
-                }
-            }
-            return true;
-        }
-
-        function MostrarValidarCampoXML() {
-            // Mostrar mensaje de error
-            var validaTxtXml = document.getElementById('validaTxtXml');
-            if (validaTxtXml) {
-                validaTxtXml.style.display = 'block';
-            }
-
-            // Poner en rojo el asterisco del label
-            var validaLblXml = document.getElementById('validaLblXml');
-            if (validaLblXml) {
-                validaLblXml.style.color = 'red';
-                validaLblXml.style.fontWeight = 'bold';
-            }
-        }
-
-        function OcultarValidarCampoXML() {
-            // Ocultar mensaje de error
-            var validaTxtXml = document.getElementById('validaTxtXml');
-            if (validaTxtXml) {
-                validaTxtXml.style.display = 'none';
-            }
-
-            // Restablecer color del asterisco
-            var validaLblXml = document.getElementById('validaLblXml');
-            if (validaLblXml) {
-                validaLblXml.style.color = '';
-                validaLblXml.style.fontWeight = '';
-            }
-        }
-
-        function showBotonImprimir() {
-            $('#BtnImprimirXml').show();
-        }
-
-    </script>
-
-    <link href="Styles/stilosVerificaXml.css" rel="stylesheet" />
-
-
-                    <div id="dvAlertMaster"></div>
-                </div>
-                <div class="footer noPrint">
-                </div>
-            </div>
-        </main>
-    
 <script type="text/javascript">
-//<![CDATA[
-var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_MainContent_VsResumenErrores"));
-//]]>
-</script>
-
-<script type="text/javascript">
-//<![CDATA[
-var ctl00_MainContent_VsResumenErrores = document.all ? document.all["ctl00_MainContent_VsResumenErrores"] : document.getElementById("ctl00_MainContent_VsResumenErrores");
-ctl00_MainContent_VsResumenErrores.displaymode = "List";
-ctl00_MainContent_VsResumenErrores.validationGroup = "Busqueda";
-//]]>
-</script>
-
-
-<script type="text/javascript">
-//<![CDATA[
-$("#ctl00_MainContent_TxtUUID").mask("hhhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh");limpiarXmlCodeBind();OcultarValidarCampoXML();cambiarTab('verificaXml');
-(function(id) {
-    var e = document.getElementById(id);
-    if (e) {
-        e.dispose = function() {
-            Array.remove(Page_ValidationSummaries, document.getElementById(id));
-        }
-        e = null;
+    // --- Funciones de control y lógica ---
+    function validarCaracteres() {
+        supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcReceptor");
+        supressUpdatePanelRequestErrorCharacters("#ctl00_MainContent_TxtRfcEmisor");
     }
-})('ctl00_MainContent_VsResumenErrores');
-Sys.Application.add_init(function() {
-    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":500,"dynamicLayout":true}, null, null, $get("ctl00_MainContent_UpdateProgress1"));
-});
-//]]>
-</script>
-</form>
-    <script type="text/javascript">
-        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequest);
 
-        function endRequest(sender, e) {
-            if (e.get_error()) {
+    function performCheck() {
+        return true; 
+    }
 
-                if ($("#divRedLenta") != undefined) {
-                    $("#divRedLenta").remove();
+    $(document).ready(function () {
+        if (!sessionStorage.getItem('paginaCargada')) {
+            localStorage.removeItem('tabActivo');
+            sessionStorage.setItem('paginaCargada', 'true');
+        }
+        var tabActivo = localStorage.getItem('tabActivo') || 'verificaFolio';
+        if (tabActivo == 'verificaFolio') { $('#chkFolio').prop('checked', true); $('#chkFolio').click(); }
+        if (tabActivo == 'verificaXml') { $('#chkXml').prop('checked', true); $('#chkXml').click(); }
+        
+        var texto = document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value;
+        if (texto != '') { document.getElementById('ctl00_MainContent_TxtCaptchaNumbers').value = ''; }
+        
+        initFileUploader();
+    });
+
+    function guardarTab(tabId) {
+        if (tabId == 'verificaFolio') {
+            $('#ctl00_MainContent_PnlResultados').hide();
+            $('#ctl00_MainContent_PnlNoResultados').hide();
+            $('#ctl00_MainContent_alertEfos').hide(); 
+            $('#ctl00_MainContent_TxtCaptchaNumbers').val(''); 
+            limpiarXml();
+            $('#ctl00_MainContent_hdnConsultaFolio').val(true);
+            $('#BtnImprimirXml').hide();
+        }
+        if (tabId == 'verificaXml') {
+            $('#ctl00_MainContent_divAviso').hide();
+            $('#ctl00_MainContent_hdnConsultaFolio').val(false);
+            $('#ctl00_MainContent_TxtUUID').val('');
+            $('#ctl00_MainContent_TxtRfcEmisor').val('');
+            $('#ctl00_MainContent_TxtRfcReceptor').val('');
+        }
+        localStorage.setItem('tabActivo', tabId);
+    }
+
+    function limpiarXml() {
+        $('#ctl00_MainContent_divAvisoXml').hide();
+        $('#validaTamanioXml').hide();
+        $('#ctl00_MainContent_PnlResultadosXml').hide();
+        $('#txtArchivoXmlSeleccionado').val('');
+        $('#ctl00_MainContent_pnlErrorCaptchaXml').hide();
+        $('#ctl00_MainContent_alertNoResultadosXml').hide();
+        $('#ctl00_MainContent_alertSuccessXml').hide(); 
+        $('#ctl00_MainContent_fileUploadXML').val('');
+        $('#ctl00_MainContent_divValidacionXml').hide();
+        $('#ctl00_MainContent_alertEfosXml').hide();
+    }
+
+    function initFileUploader() {
+        const fileUploader = document.getElementById('ctl00_MainContent_fileUploadXML');
+        const txtNombreArchivo = document.getElementById('txtArchivoXmlSeleccionado');
+        const divAvisoXml = document.getElementById('validaTamanioXml');
+        if (fileUploader) {
+            fileUploader.addEventListener('change', function () {
+                divAvisoXml.style.display = 'none';
+                if (fileUploader.files.length > 0) {
+                    OcultarValidarCampoXML();
+                    txtNombreArchivo.value = fileUploader.files[0].name;
                 }
-
-                var newDivSuccess = document.createElement('div');
-                newDivSuccess.id = "divRedLenta";
-                newDivSuccess.className = "col-md-12 alert alert-warning alert-dismissible";
-                newDivSuccess.innerHTML = "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>¡Atención! <br/></strong> En estos momentos el servicio de red presenta lentitud, favor de intentar nuevamente.";
-                document.getElementById('dvAlertMaster').appendChild(newDivSuccess);
-                $('html, body').animate({ scrollTop: $('#dvAlertMaster').offset().top }, 'slow');
-                //alert('En estos momentos el servicio de red presenta lentitud, favor de intentar nuevamente.');
-
-                e.set_errorHandled(true);
-            }
+            });
         }
+    }
 
-        (function () {
-            if (Sys && Sys.UI && Sys.UI.DomEvent && Sys.UI.DomEvent._removeHandler) {
-                var originalRemoveHandler = Sys.UI.DomEvent._removeHandler;
+    function OcultarValidarCampoXML() {
+        var validaTxtXml = document.getElementById('validaTxtXml');
+        if (validaTxtXml) validaTxtXml.style.display = 'none';
+    }
 
-                Sys.UI.DomEvent._removeHandler = function (a, e, f) {
-                    // Si el elemento o el evento no existen, simplemente salimos
-                    if (!a || !a._events || !a._events[e]) {
-                        return;
-                    }
+    // --- Función personalizada de validación ---
+    function validarSinRedirigir() {
+        var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
+        var contenedor = document.getElementById("printArea");
+        var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
-                    try {
-                        var d = null,
-                            c = a._events[e];
-                        for (var b = 0, g = c.length; b < g; b++) {
-                            if (c[b].handler === f) {
-                                d = c[b].browserHandler;
-                                break;
-                            }
-                        }
-                        if (a.removeEventListener)
-                            a.removeEventListener(e, d, false);
-                        else if (a.detachEvent)
-                            a.detachEvent("on" + e, d);
-                        c.splice(b, 1);
-                    } catch (err) {
-                        // Silenciamos errores por seguridad
-                        if (window.console) {
-                            console.warn("Error en _removeHandler suprimido:", err);
-                        }
-                    }
-                };
-            }
-        })();
-
-       <script>
-        function validarSinRedirigir() {
-            var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
-            var contenedor = document.getElementById("printArea");
-            var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
-
-            if (folio.trim() === folioCorrecto) {
-                contenedor.innerHTML = `
-                <div style="margin-top: 20px;">
-                    <h3 style="color: #691C32; margin-bottom: 15px;">Resultado de la verificación:</h3>
-                    <table class="table table-bordered" style="width:100%; border: 1px solid #ddd; border-collapse: collapse;">
-                        <tr style="background-color: #f9f9f9;">
-                            <th style="padding: 10px; border: 1px solid #ddd;">RFC del emisor</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Nombre o razón social del emisor</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">RFC del receptor</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Nombre o razón social del receptor</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd;">ADU811129I31</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">AUTOMOTRIZ DE DURANGO</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">NESK901206FL2</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</td>
-                        </tr>
-                        <tr style="background-color: #f9f9f9;">
-                            <th style="padding: 10px; border: 1px solid #ddd;">Folio fiscal</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Fecha de expedición</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Fecha certificación SAT</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">PAC que certificó</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd;">76631357-06BE-4600-BC5F-83A903287197</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">2024-01-27T10:11:26</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">2024-01-27T10:18:04</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">SFE0807172W8</td>
-                        </tr>
-                        <tr style="background-color: #f9f9f9;">
-                            <th style="padding: 10px; border: 1px solid #ddd;">Total del CFDI</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Efecto del comprobante</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Estado CFDI</th>
-                            <th style="padding: 10px; border: 1px solid #ddd;">Estatus de cancelación</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd;">$256,900.00</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">Ingreso</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">Vigente</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">No cancelable</td>
-                        </tr>
-                    </table>
-                </div>`;
-            } else {
-                alert("Folio no encontrado.");
-                contenedor.innerHTML = "";
-            }
+        if (folio.trim() === folioCorrecto) {
+            contenedor.innerHTML = `
+            <div style="margin-top: 20px;">
+                <h3 style="color: #691C32; margin-bottom: 15px;">Resultado de la verificación:</h3>
+                <table class="table table-bordered" style="width:100%; border: 1px solid #ddd; border-collapse: collapse;">
+                    <tr style="background-color: #f9f9f9;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">RFC Emisor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">RFC Receptor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Folio fiscal</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">ADU811129I31</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">NESK901206FL2</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">76631357-06BE-4600-BC5F-83A903287197</td>
+                    </tr>
+                </table>
+            </div>`;
+        } else {
+            alert("Folio no encontrado.");
+            contenedor.innerHTML = "";
         }
-    </script>
+    }
+</script>
 
-    <div id="dvAlertMaster"></div>
-    <div class="footer noPrint"></div>
-    </div>
-    </main>
+<link href="Styles/stilosVerificaXml.css" rel="stylesheet" />
 
+<div id="dvAlertMaster"></div>
+<div class="footer noPrint"></div>
+</main>
 </body>
 </html>
