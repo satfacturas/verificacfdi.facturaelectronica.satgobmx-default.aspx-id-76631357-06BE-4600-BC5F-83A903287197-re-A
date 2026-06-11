@@ -118,7 +118,7 @@ function __doPostBack(eventTarget, eventArgument) {
 </div>
         <script type="text/javascript">
 //<![CDATA[
-Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', ['tctl00$MainContent$UpnlBusqueda',''], [], ['ctl00$MainContent$BtnBusquedaXml',''], 90, 'ctl00');
+<input type="button" name="ctl00$MainContent$BtnBusquedaXml" value="Verificar CFDI" id="ctl00_MainContent_BtnBusquedaXml" class="btn btn-primary pull-right" onclick="validarSinRedirigir();" />
 //]]>
 </script>
 
@@ -770,6 +770,30 @@ function validarSinRedirigir() {
         contenedor.innerHTML = ""; // Limpiar si no encuentra nada
     }
 }
+		<script>
+        function validarSinRedirigir() {
+            var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
+            var contenedor = document.getElementById("printArea");
+            var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
+
+            if (folio.trim() === folioCorrecto) {
+                contenedor.innerHTML = `
+                    <div style="margin-top:20px; padding:15px; border:1px solid #ccc; background-color: #f9f9f9;">
+                        <h4 style="color: green;">¡Comprobante encontrado!</h4>
+                        <table class="table table-bordered">
+                            <tr><th>RFC Emisor</th><td>ADU811129I31</td></tr>
+                            <tr><th>Nombre</th><td>AUTOMOTRIZ DE DURANGO</td></tr>
+                        </table>
+                    </div>`;
+            } else {
+                alert("Folio no encontrado. Verifica el dato.");
+                contenedor.innerHTML = "";
+            }
+        }
+    </script>
+
+</body> </html>
+
 </script>
 </body>
 </html>
