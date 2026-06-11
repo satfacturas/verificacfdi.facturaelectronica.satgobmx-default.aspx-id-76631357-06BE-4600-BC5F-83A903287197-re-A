@@ -367,18 +367,21 @@ generarCaptcha();
                     </div>
                     
                     
-                    <br />
-                    <div class="row form-group noPrint">
-                        <div class="">
-                            <div class="col-md-2 nopaddigIzq">
-                                <div id="captchaXml" class="captcha">
-                                    <img id="ctl00_MainContent_ImgCaptchaXml" class="captchaimage" src="GeneraCaptcha.aspx?Data=O1zYUw748d/tfdgP+xFK7FBXb6DqBOvCtGhKjdUZQ4caL6nvfSLQcQHwRKiuF4tJZtEm/YhImcyfd0fN8K8ybMtuojOPzXTzhxInCanCwGo=" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <span id="ctl00_MainContent_LblTitleCaptchaTxt" class="control-label">Proporcione los dígitos de la imagen*:</span>
-                                <input name="ctl00$MainContent$TxtCaptchaNumbersXml" type="text" maxlength="5" id="ctl00_MainContent_TxtCaptchaNumbersXml" class="form-control" onchange="habilitarBoton();" oninput="habilitarBoton();" />
-                            </div>
+                   <div class="col-md-6">
+    <label class="control-label">
+        Verificación de seguridad
+    </label>
+
+    <div class="cf-turnstile"
+         data-sitekey="TU_SITE_KEY">
+    </div>
+</div>
+
+<script
+src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+async
+defer>
+</script>
                             <div class="col-md-3 derecha">
                                 <br />
                                 <input type="submit" name="ctl00$MainContent$BtnBusquedaXml" value="Verificar CFDI" id="ctl00_MainContent_BtnBusquedaXml" disabled="disabled" class="aspNetDisabled btn btn-primary pull-right" />
