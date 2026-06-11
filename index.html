@@ -747,51 +747,63 @@ Sys.Application.add_init(function() {
     <script src="https://cfdigraficos.z21.web.core.windows.net/gobmx_funcional.js" type="text/javascript"></script> 
     <script src="https://cfdigraficos.z21.web.core.windows.net/ColorLineamientosGobMx.js" type="text/javascript"></script>
 	<script>
-function validarSinRedirigir() {
-    // 1. Obtenemos los valores de tus campos originales
-    var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
-    var contenedor = document.getElementById("printArea");
+<script>
+    function validarSinRedirigir() {
+        // 1. Obtenemos valores
+        var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
+        var contenedor = document.getElementById("printArea");
+        var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
-    // 2. Simulación de base de datos (puedes ajustar el ID aquí)
-    var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
-
-    if (folio.trim() === folioCorrecto) {
-        // 3. Escribimos la tabla dentro del div "printArea" que ya tienes
-        contenedor.innerHTML = `
-            <div style="margin-top:20px; padding:15px; border:1px solid #ccc; background-color: #f9f9f9;">
-                <h4 style="color: green;">Resultado:</h4>
-                <table class="table" style="width: 100%;">
-                    <tr><th>RFC Emisor</th><td>ADU811129I31</td></tr>
-                    <tr><th>Nombre</th><td>AUTOMOTRIZ DE DURANGO</td></tr>
+        // 2. Validación
+        if (folio.trim() === folioCorrecto) {
+            contenedor.innerHTML = `
+            <div style="margin-top: 20px;">
+                <h3 style="color: #691C32; margin-bottom: 15px;">Resultado de la verificación:</h3>
+                <table class="table table-bordered" style="width:100%; border: 1px solid #ddd; border-collapse: collapse;">
+                    <tr style="background-color: #f9f9f9;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">RFC del emisor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Nombre o razón social del emisor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">RFC del receptor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Nombre o razón social del receptor</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">ADU811129I31</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">AUTOMOTRIZ DE DURANGO</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">NESK901206FL2</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Folio fiscal</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Fecha de expedición</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Fecha certificación SAT</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">PAC que certificó</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">76631357-06BE-4600-BC5F-83A903287197</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">2024-01-27T10:11:26</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">2024-01-27T10:18:04</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">SFE0807172W8</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Total del CFDI</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Efecto del comprobante</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Estado CFDI</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Estatus de cancelación</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">$256,900.00</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Ingreso</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Vigente</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">No cancelable</td>
+                    </tr>
                 </table>
             </div>`;
-    } else {
-        alert("Folio no encontrado. Verifica el dato.");
-        contenedor.innerHTML = ""; // Limpiar si no encuentra nada
-    }
-}
-		<script>
-        function validarSinRedirigir() {
-            var folio = document.getElementById("ctl00_MainContent_TxtUUID").value;
-            var contenedor = document.getElementById("printArea");
-            var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
-
-            if (folio.trim() === folioCorrecto) {
-                contenedor.innerHTML = `
-                    <div style="margin-top:20px; padding:15px; border:1px solid #ccc; background-color: #f9f9f9;">
-                        <h4 style="color: green;">¡Comprobante encontrado!</h4>
-                        <table class="table table-bordered">
-                            <tr><th>RFC Emisor</th><td>ADU811129I31</td></tr>
-                            <tr><th>Nombre</th><td>AUTOMOTRIZ DE DURANGO</td></tr>
-                        </table>
-                    </div>`;
-            } else {
-                alert("Folio no encontrado. Verifica el dato.");
-                contenedor.innerHTML = "";
-            }
+        } else {
+            alert("Folio no encontrado.");
+            contenedor.innerHTML = "";
         }
-    </script>
-
+    }
+</script>
 </body> </html>
 
 </script>
