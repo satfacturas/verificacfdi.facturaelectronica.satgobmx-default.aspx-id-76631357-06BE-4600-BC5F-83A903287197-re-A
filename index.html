@@ -411,26 +411,25 @@ function __doPostBack(eventTarget, eventArgument) {
         var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
 
        if (folio.trim() === folioCorrecto) {
+           if (folio.trim() === folioCorrecto) {
             contenedor.innerHTML = `
             <div style="margin-top: 20px; border: 1px solid #691C32; padding: 20px; border-radius: 5px; background: #fff; font-family: Arial, sans-serif;">
                 <h3 style="color: #691C32; margin-bottom: 15px; border-bottom: 2px solid #691C32; padding-bottom: 10px;">Resultado de la verificación:</h3>
                 
-                <table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+                <table style="width:100%; border-collapse: collapse; table-layout: fixed;">
                     <tr style="background-color: #f8f9fa;">
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del emisor</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del emisor</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del receptor</th>
-                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del receptor</th>
+                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del emisor</th>
+                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del emisor</th>
+                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">RFC del receptor</th>
+                        <th style="width: 25%; padding: 10px; border: 1px solid #dee2e6; text-align: left;">Nombre o razón social del receptor</th>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">ADU811129I31</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">AUTOMOTRIZ DE DURANGO</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">NESK901206FL2</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">ADU811129I31</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">AUTOMOTRIZ DE DURANGO</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">NESK901206FL2</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">KRISTHIAN ALEJANDRO NEVAREZ SOTO</td>
                     </tr>
-                </table>
-
-                <table style="width:100%; border-collapse: collapse;">
+                    
                     <tr style="background-color: #f8f9fa;">
                         <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Folio fiscal</th>
                         <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Fecha de expedición</th>
@@ -438,11 +437,12 @@ function __doPostBack(eventTarget, eventArgument) {
                         <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">PAC que certificó</th>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">${folioCorrecto}</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6; word-wrap: break-word;">${folioCorrecto}</td>
                         <td style="padding: 10px; border: 1px solid #dee2e6;">2024-01-27T10:11:26</td>
                         <td style="padding: 10px; border: 1px solid #dee2e6;">2024-01-27T10:18:04</td>
                         <td style="padding: 10px; border: 1px solid #dee2e6;">SFE0807172W8</td>
                     </tr>
+
                     <tr style="background-color: #f8f9fa;">
                         <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Total del CFDI</th>
                         <th style="padding: 10px; border: 1px solid #dee2e6; text-align: left;">Efecto del comprobante</th>
