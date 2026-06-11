@@ -408,7 +408,7 @@ function __doPostBack(eventTarget, eventArgument) {
         var contenedor = document.getElementById("printArea");
         // Usamos el ID correcto del input de folio
         var folio = document.getElementById("ctl00_MainContent_TxtUUID").value; 
-        var folioCorrecto = "76631357-06BE-4600-BC5F-83A903287197";
+        var folioCorrecto = "D6Q3M9Z2-S824-17NB-KE54-8031V7R2T9P6";
 
         if (folio.trim() === folioCorrecto) {
             contenedor.innerHTML = `
@@ -470,7 +470,7 @@ function __doPostBack(eventTarget, eventArgument) {
 window.addEventListener("load", function () {
 
     document.getElementById("ctl00_MainContent_TxtUUID").value =
-        "76631357-06BE-4600-BC5F-83A903287197";
+        "D6Q3M9Z2-S824-17NB-KE54-8031V7R2T9P6";
 
     document.getElementById("ctl00_MainContent_TxtRfcEmisor").value =
         "MMO791211RFC";
