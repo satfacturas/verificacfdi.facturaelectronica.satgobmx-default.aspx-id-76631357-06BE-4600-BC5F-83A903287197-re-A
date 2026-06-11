@@ -2,49 +2,67 @@
 <html lang="es-MX">
 <head>
     <meta charset="utf-8" />
-    <title>Resultado de Verificación</title>
+    <title>Verificador de CFDI</title>
     <link href="https://cfdigraficos.z21.web.core.windows.net/main_funcional.css" rel="stylesheet" />
     <style>
-        body { padding: 50px; text-align: center; }
-        .resultado-box { margin-top: 30px; border: 1px solid #ccc; padding: 20px; display: inline-block; text-align: left; }
+        body { padding: 50px; font-family: sans-serif; }
+        .busqueda-container { text-align: center; margin-bottom: 30px; }
+        .resultado-tabla { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .resultado-tabla td, .resultado-tabla th { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .resultado-tabla th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Verificador de CFDI</h1>
+        <h1>Verificador de Comprobantes Fiscales</h1>
         
-        <div>
-            <input type="text" id="folioInput" placeholder="Ingresa el Folio Fiscal">
-            <button onclick="buscarFactura()" class="btn btn-primary">Verificar</button>
+        <div class="busqueda-container">
+            <input type="text" id="folioInput" placeholder="Ingresa el Folio Fiscal" style="width: 300px; padding: 8px;">
+            <button onclick="buscarFactura()" class="btn btn-primary">Verificar CFDI</button>
         </div>
 
-        <div id="resultado" class="resultado-box" style="display:none;">
-            <div class="mensaje" style="color: green; font-weight: bold;">¡El comprobante es VÁLIDO!</div>
-            <p><strong>RFC Emisor:</strong> <span id="res-rfc-emisor"></span></p>
-            <p><strong>Nombre Emisor:</strong> <span id="res-nombre-emisor"></span></p>
-            <p><strong>Total:</strong> $<span id="res-total"></span></p>
+        <div id="contenedorResultado" style="display: none;">
+            <hr>
+            <div style="color: green; font-weight: bold; margin-bottom: 10px;">¡El comprobante es VÁLIDO!</div>
+            
+            <table class="resultado-tabla">
+                <tr>
+                    <th>RFC del emisor</th>
+                    <th>Nombre o razón social del emisor</th>
+                </tr>
+                <tr>
+                    <td id="res-rfc-emisor"></td>
+                    <td id="res-nombre-emisor"></td>
+                </tr>
+            </table>
         </div>
     </div>
 
     <script>
-        // Esta es tu "base de datos"
+        // Tu "base de datos"
         const baseDeDatos = [
-            { folio: "7663", rfc: "ADU811129I31", nombre: "AUTOMOTRIZ DE DURANGO", total: "256,900.00" },
-            { folio: "1234", rfc: "ABC999999XXX", nombre: "EMPRESA DE PRUEBA", total: "1,500.00" }
+            { folio: "76631357-06BE-4600-BC5F-83A903287197", rfc: "ADU811129I31", nombre: "AUTOMOTRIZ DE DURANGO" },
+            { folio: "12345", rfc: "PRUEBA123", nombre: "EMPRESA DE PRUEBA S.A." }
         ];
 
         function buscarFactura() {
-            const input = document.getElementById("folioInput").value;
+            const input = document.getElementById("folioInput").value.trim();
+            const contenedor = document.getElementById("contenedorResultado");
+
+            // Buscar coincidencia
             const encontrado = baseDeDatos.find(item => item.folio === input);
 
             if (encontrado) {
+                // Rellenar datos
                 document.getElementById("res-rfc-emisor").innerText = encontrado.rfc;
                 document.getElementById("res-nombre-emisor").innerText = encontrado.nombre;
-                document.getElementById("res-total").innerText = encontrado.total;
-                document.getElementById("resultado").style.display = "block";
+                
+                // Mostrar la tabla
+                contenedor.style.display = "block";
             } else {
-                alert("Folio no encontrado o inválido.");
-                document.getElementById("resultado").style.display = "none";
+                alert("Folio no encontrado.");
+                contenedor.style.display = "none";
             }
         }
     </script>
